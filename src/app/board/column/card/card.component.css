@@ -1,0 +1,10 @@
+.list-group-flushx {
+  display: inline-flex;
+  position: relative;
+}
+
+.list-group-item {
+  margin-bottom: 5px;
+}
+
+
