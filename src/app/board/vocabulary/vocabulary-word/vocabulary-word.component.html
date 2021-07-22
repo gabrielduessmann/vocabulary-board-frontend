@@ -1,0 +1,42 @@
+
+
+<div>
+
+  <form [formGroup]="vocabularyWordForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label>Word</label>
+          <input type="text" id="word" class="form-control" formControlName="word">
+          <span *ngIf="vocabularyWordForm.controls.word.invalid && vocabularyWordForm.controls.word.touched"
+                class="messageError">
+            <small>This field is mandatory</small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="description" class="form-control" formControlName="description">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+
+          <button *ngIf="isEditMode" type="button" class="btn btn-danger">Cancel</button>
+          <button type="submit" class="btn btn-success" [disabled]="vocabularyWordForm.invalid">Add</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
