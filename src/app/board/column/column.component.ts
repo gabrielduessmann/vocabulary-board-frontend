@@ -22,19 +22,18 @@ export class ColumnComponent implements OnInit, OnDestroy {
   constructor(private vocabularyWordService: VocabularyWordService) { }
 
   ngOnInit(): void {
-    this.allVocabulary = [
-      new Vocabulary("hello", "2"),
-      new Vocabulary("bye", "3"),
-      new Vocabulary("never mind", "3"),
-    ];
+    if (this.status == StatusEnum.POOL)
+    this.getAllVocabularies();
+
     this.getAllVocabularyWords(this.status, this.sprint);
+
   }
 
   getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
     if (status == StatusEnum.POOL) {
       this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
-        (vocab: Vocabulary[]) => {
-          this.allVocabulary = vocab;
+        (vocab: Vocabulary) => {
+          this.allVocabulary.push(vocab);
         }
       );
     }
@@ -65,6 +64,15 @@ export class ColumnComponent implements OnInit, OnDestroy {
         new Vocabulary("never mind", ""),
       ];
     }
+  }
+
+  getAllVocabularies() {
+    this.vocabularyWordService
+      .getVocabs()
+      .toPromise()
+      .then(res => this.allVocabulary = res)
+      .catch(err => console.log(err))
+      .finally();
   }
 
   ngOnDestroy() {
