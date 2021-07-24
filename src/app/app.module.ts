@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { VocabularyWordComponent } from './board/vocabulary/vocabulary-word/vocabulary-word.component';
 import { ModalComponent } from './board/modal/modal.component';
 import {BsModalService} from "ngx-bootstrap/modal";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {BsModalService} from "ngx-bootstrap/modal";
     NgbModule,
     RoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent],

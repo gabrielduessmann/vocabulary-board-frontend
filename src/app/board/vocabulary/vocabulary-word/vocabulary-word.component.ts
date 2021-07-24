@@ -36,7 +36,7 @@ export class VocabularyWordComponent implements OnInit {
       this.vocabularyWordForm.value.word,
       this.vocabularyWordForm.value.description
     );
-    this.vocabularyWordService.addNewWord(word);
+    this.vocabularyWordService.addNewVocab(word);
   }
 
 }
