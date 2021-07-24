@@ -43,6 +43,8 @@ export class ColumnComponent implements OnInit, OnDestroy {
         new VocabularyModel("hello", ""),
         new VocabularyModel("bye", ""),
         new VocabularyModel("never mind", ""),
+        new VocabularyModel("computer", ""),
+        new VocabularyModel("body", ""),
         new VocabularyModel("hello", ""),
         new VocabularyModel("bye", ""),
         new VocabularyModel("never mind", ""),
