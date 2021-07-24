@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {VocabularyModel} from "./vocabulary.model";
+import {Vocabulary} from "./vocabulary.model";
 import {Subject} from "rxjs";
 
 @Injectable({
@@ -7,12 +7,12 @@ import {Subject} from "rxjs";
 })
 export class VocabularyWordService {
 
-  words: VocabularyModel[] = []
-  wordsUpdateChange: Subject<VocabularyModel[]> = new Subject<VocabularyModel[]>();
+  words: Vocabulary[] = []
+  wordsUpdateChange: Subject<Vocabulary[]> = new Subject<Vocabulary[]>();
 
   constructor() { }
 
-  addNewWord(newWord: VocabularyModel) {
+  addNewWord(newWord: Vocabulary) {
     this.words.push(newWord);
     console.log(this.words);
     this.wordsUpdateChange.next(this.words.slice());

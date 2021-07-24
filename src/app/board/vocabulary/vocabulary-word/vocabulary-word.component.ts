@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {VocabularyWordService} from "./vocabulary-word.service";
-import {VocabularyModel} from "./vocabulary.model";
+import {Vocabulary} from "./vocabulary.model";
 
 @Component({
   selector: 'vocabulary-word',
@@ -32,7 +32,7 @@ export class VocabularyWordComponent implements OnInit {
   }
 
   onSubmit() {
-    let word: VocabularyModel = new VocabularyModel(
+    let word: Vocabulary = new Vocabulary(
       this.vocabularyWordForm.value.word,
       this.vocabularyWordForm.value.description
     );

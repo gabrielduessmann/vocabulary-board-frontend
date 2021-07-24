@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {VocabularyModel} from "../vocabulary/vocabulary-word/vocabulary.model";
+import {Vocabulary} from "../vocabulary/vocabulary-word/vocabulary.model";
 import {StatusEnum} from "./status.enum";
 import {SprintEnum} from "./sprint.enum";
 import {Subscription} from "rxjs";
@@ -15,7 +15,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   @Input() sprint: SprintEnum;
   @Input() status: StatusEnum;
   @Input() title: string;
-  allVocabulary: VocabularyModel[] = [];
+  allVocabulary: Vocabulary[] = [];
   // wordsUpdateSubscription: Subject<VocabularyWordModel[]> = new Subject<VocabularyWordModel[]>();
   wordsUpdateSubscription: Subscription;
 
@@ -23,9 +23,9 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.allVocabulary = [
-      new VocabularyModel("hello", ""),
-      new VocabularyModel("bye", ""),
-      new VocabularyModel("never mind", ""),
+      new Vocabulary("hello", ""),
+      new Vocabulary("bye", ""),
+      new Vocabulary("never mind", ""),
     ];
     this.getAllVocabularyWords(this.status, this.sprint);
   }
@@ -33,36 +33,36 @@ export class ColumnComponent implements OnInit, OnDestroy {
   getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
     if (status == StatusEnum.POOL) {
       this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
-        (vocab: VocabularyModel[]) => {
+        (vocab: Vocabulary[]) => {
           this.allVocabulary = vocab;
         }
       );
     }
     else {
       this.allVocabulary = [
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("computer", ""),
-        new VocabularyModel("body", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("car", ""),
-        new VocabularyModel("to develop", ""),
-        new VocabularyModel("to drive", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
+        new Vocabulary("computer", ""),
+        new Vocabulary("body", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("car", ""),
+        new Vocabulary("to develop", ""),
+        new Vocabulary("to drive", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
+        new Vocabulary("hello", ""),
+        new Vocabulary("bye", ""),
+        new Vocabulary("never mind", ""),
       ];
     }
   }
