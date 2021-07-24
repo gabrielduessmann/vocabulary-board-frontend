@@ -11,6 +11,8 @@ import {BoardComponent} from "./board/board.component";
 import {RoutingModule} from "./routing/routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { VocabularyWordComponent } from './board/vocabulary/vocabulary-word/vocabulary-word.component';
+import { ModalComponent } from './board/modal/modal.component';
+import {BsModalService} from "ngx-bootstrap/modal";
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { VocabularyWordComponent } from './board/vocabulary/vocabulary-word/voca
     ColumnComponent,
     CardComponent,
     BoardComponent,
-    VocabularyWordComponent
+    VocabularyWordComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { VocabularyWordComponent } from './board/vocabulary/vocabulary-word/voca
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BsModalService],
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent] // FIXME really necessay?
 })
 export class AppModule { }

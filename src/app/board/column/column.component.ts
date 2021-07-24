@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {VocabularyWordModel} from "../vocabulary/vocabulary-word/vocabulary-word.model";
+import {VocabularyModel} from "../vocabulary/vocabulary-word/vocabulary.model";
 import {StatusEnum} from "./status.enum";
 import {SprintEnum} from "./sprint.enum";
 import {Subscription} from "rxjs";
@@ -15,7 +15,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   @Input() sprint: SprintEnum;
   @Input() status: StatusEnum;
   @Input() title: string;
-  allVocabulary: VocabularyWordModel[] = [];
+  allVocabulary: VocabularyModel[] = [];
   // wordsUpdateSubscription: Subject<VocabularyWordModel[]> = new Subject<VocabularyWordModel[]>();
   wordsUpdateSubscription: Subscription;
 
@@ -23,9 +23,9 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.allVocabulary = [
-      new VocabularyWordModel("hello", ""),
-      new VocabularyWordModel("bye", ""),
-      new VocabularyWordModel("never mind", ""),
+      new VocabularyModel("hello", ""),
+      new VocabularyModel("bye", ""),
+      new VocabularyModel("never mind", ""),
     ];
     this.getAllVocabularyWords(this.status, this.sprint);
   }
@@ -33,14 +33,32 @@ export class ColumnComponent implements OnInit, OnDestroy {
   getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
     if (status == StatusEnum.POOL) {
       this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
-        (vocab: VocabularyWordModel[]) => {
+        (vocab: VocabularyModel[]) => {
           this.allVocabulary = vocab;
-          console.log("All vocab: "+this.allVocabulary);
         }
       );
     }
     else {
-      this.allVocabulary = [];
+      this.allVocabulary = [
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+        new VocabularyModel("hello", ""),
+        new VocabularyModel("bye", ""),
+        new VocabularyModel("never mind", ""),
+      ];
     }
   }
 

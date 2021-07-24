@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {VocabularyWordModel} from "../../vocabulary/vocabulary-word/vocabulary-word.model";
+import {BsModalRef} from "ngx-bootstrap/modal";
+import {ModalService} from "../../modal/modal.service";
+
 
 @Component({
   selector: 'card',
@@ -10,10 +12,13 @@ export class CardComponent implements OnInit {
 
   @Input() word: string;
 
-  constructor() { }
+  constructor(private modalService: ModalService) { }
 
   ngOnInit(): void {
     console.log("word recebida: "+this.word);
   }
 
+  openModal() {
+    this.modalService.showModal(this.word);
+  }
 }
