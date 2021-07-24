@@ -1,5 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap/modal";
+import {Vocabulary} from "../vocabulary/vocabulary-word/vocabulary.model";
+import {CardService} from "../column/card/card.service";
 
 @Component({
   selector: 'modal',
@@ -8,12 +10,13 @@ import {BsModalRef} from "ngx-bootstrap/modal";
 })
 export class ModalComponent implements OnInit, OnDestroy {
 
-  @Input() title: string;
   updateVocabulary: boolean = false;
+  vocab: Vocabulary;
 
-  constructor(private bsModalRef: BsModalRef) {}
+  constructor(private bsModalRef: BsModalRef, private cardService: CardService) {}
 
   ngOnInit() {
+    this.vocab = this.cardService.getCacheVocab();
   }
 
   onSave() {

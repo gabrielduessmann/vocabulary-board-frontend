@@ -23,9 +23,9 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.allVocabulary = [
-      new Vocabulary("hello", ""),
-      new Vocabulary("bye", ""),
-      new Vocabulary("never mind", ""),
+      new Vocabulary("hello", "2"),
+      new Vocabulary("bye", "3"),
+      new Vocabulary("never mind", "3"),
     ];
     this.getAllVocabularyWords(this.status, this.sprint);
   }
