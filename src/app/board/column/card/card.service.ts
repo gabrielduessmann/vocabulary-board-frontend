@@ -10,11 +10,11 @@ export class CardService {
 
   constructor() { }
 
-  public setCacheVocab(vocab: Vocabulary) {
+  public setModalVocab(vocab: Vocabulary) {
     this.vocab = vocab;
   }
 
-  public getCacheVocab(): Vocabulary {
+  public getModalVocab(): Vocabulary {
     return this.vocab;
   }
 

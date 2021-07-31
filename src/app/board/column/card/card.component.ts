@@ -16,10 +16,11 @@ export class CardComponent implements OnInit {
   constructor(private modalService: ModalService, private cardService: CardService) { }
 
   ngOnInit(): void {
+
   }
 
   openModal() {
-    this.cardService.setCacheVocab(this.vocab)
+    this.cardService.setModalVocab(this.vocab);
     this.modalService.showModal();
   }
 }

@@ -16,7 +16,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   constructor(private bsModalRef: BsModalRef, private cardService: CardService) {}
 
   ngOnInit() {
-    this.vocab = this.cardService.getCacheVocab();
+    this.vocab = this.cardService.getModalVocab();
   }
 
   onSave() {

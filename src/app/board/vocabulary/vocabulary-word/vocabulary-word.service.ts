@@ -42,5 +42,17 @@ export class VocabularyWordService {
       );
   }
 
+  public findVocabulariesByColumnId(columnId: string): Observable<Vocabulary[]>{
+    return this.http
+      .get<Vocabulary[]>(this.url+"/vocabularies/column/"+columnId)
+      .pipe(
+        map(vocabularies => {
+          return vocabularies.map(vocabulary => {
+            return {...vocabulary}
+          })
+        })
+      );
+  }
+
 
 }

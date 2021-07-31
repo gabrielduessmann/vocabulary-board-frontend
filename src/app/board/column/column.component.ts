@@ -4,6 +4,7 @@ import {StatusEnum} from "./status.enum";
 import {SprintEnum} from "./sprint.enum";
 import {Subscription} from "rxjs";
 import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-word.service";
+import {Column} from "./column.model";
 
 @Component({
   selector: 'column',
@@ -12,6 +13,7 @@ import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-wo
 })
 export class ColumnComponent implements OnInit, OnDestroy {
 
+  @Input() column: Column;
   @Input() sprint: SprintEnum;
   @Input() status: StatusEnum;
   @Input() title: string;
@@ -22,11 +24,20 @@ export class ColumnComponent implements OnInit, OnDestroy {
   constructor(private vocabularyWordService: VocabularyWordService) { }
 
   ngOnInit(): void {
-    if (this.status == StatusEnum.POOL)
-    this.getAllVocabularies();
 
-    this.getAllVocabularyWords(this.status, this.sprint);
+    this.getAllVocabularies(this.column.id);
 
+    // this.getAllVocabularyWords(this.status, this.sprint);
+
+  }
+
+  getAllVocabularies(columnId: string) {
+    this.vocabularyWordService
+      .findVocabulariesByColumnId(columnId)
+      .toPromise()
+      .then(res => this.allVocabulary = res)
+      .catch(err => console.log(err))
+      .finally();
   }
 
   getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
@@ -64,15 +75,6 @@ export class ColumnComponent implements OnInit, OnDestroy {
         new Vocabulary("never mind", ""),
       ];
     }
-  }
-
-  getAllVocabularies() {
-    this.vocabularyWordService
-      .getVocabs()
-      .toPromise()
-      .then(res => this.allVocabulary = res)
-      .catch(err => console.log(err))
-      .finally();
   }
 
   ngOnDestroy() {
