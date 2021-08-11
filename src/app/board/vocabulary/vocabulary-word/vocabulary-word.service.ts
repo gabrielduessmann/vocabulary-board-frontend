@@ -19,15 +19,11 @@ export class VocabularyWordService {
   public addNewVocab(vocab: Vocabulary) {
     this.http.post<Vocabulary>(this.url+"/vocabulary", vocab)
       .toPromise()
-      .then()
+      .then(res => this.wordsUpdateChange.next(res))
       .catch(err => {
         console.log(err);
       })
-      .then(res => {
-        if (res)
-          this.wordsUpdateChange.next(res);
-      }
-    );
+      .finally();
   }
 
   public getVocabs(): Observable<Vocabulary[]> {

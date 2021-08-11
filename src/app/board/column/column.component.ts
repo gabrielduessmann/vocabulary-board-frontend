@@ -14,11 +14,7 @@ import {Column} from "./column.model";
 export class ColumnComponent implements OnInit, OnDestroy {
 
   @Input() column: Column;
-  @Input() sprint: SprintEnum;
-  @Input() status: StatusEnum;
-  @Input() title: string;
   allVocabulary: Vocabulary[] = [];
-  // wordsUpdateSubscription: Subject<VocabularyWordModel[]> = new Subject<VocabularyWordModel[]>();
   wordsUpdateSubscription: Subscription;
 
   constructor(private vocabularyWordService: VocabularyWordService) { }
@@ -26,8 +22,7 @@ export class ColumnComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.getAllVocabularies(this.column.id);
-
-    // this.getAllVocabularyWords(this.status, this.sprint);
+    this.subscribeToPoolColumn(this.column.status);;
 
   }
 
@@ -40,40 +35,13 @@ export class ColumnComponent implements OnInit, OnDestroy {
       .finally();
   }
 
-  getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
-    if (status == StatusEnum.POOL) {
+  subscribeToPoolColumn(status: StatusEnum) {
+    if (status.toString() == "POOL") {
       this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
         (vocab: Vocabulary) => {
           this.allVocabulary.push(vocab);
         }
       );
-    }
-    else {
-      this.allVocabulary = [
-        new Vocabulary("hello", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-        new Vocabulary("computer", ""),
-        new Vocabulary("body", ""),
-        new Vocabulary("hello", ""),
-        new Vocabulary("car", ""),
-        new Vocabulary("to develop", ""),
-        new Vocabulary("to drive", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-        new Vocabulary("hello", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-        new Vocabulary("hello", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-        new Vocabulary("hello", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-        new Vocabulary("hello", ""),
-        new Vocabulary("bye", ""),
-        new Vocabulary("never mind", ""),
-      ];
     }
   }
 

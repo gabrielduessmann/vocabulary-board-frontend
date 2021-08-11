@@ -15,7 +15,7 @@ export class BoardService {
   }
 
   public getAllBoardColumns(): Observable<Column[]> {
-    return this.http.get<Column[]>(this.url+"/columns")
+    return this.http.get<Column[]>(this.url+"/columns/in-progress")
       .pipe(
         map(columns => {
           return columns.map(column => {
