@@ -50,5 +50,13 @@ export class VocabularyWordService {
       );
   }
 
+  public moveToNextColumn(vocabularyId: Vocabulary): void {
+    this.http.put<Vocabulary>(`${this.url}/vocabulary/moveToNextColumn`, vocabularyId)
+      .toPromise()
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+      .finally();
+  }
+
 
 }
