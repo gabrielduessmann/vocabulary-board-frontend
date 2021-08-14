@@ -3,8 +3,8 @@ import {ModalService} from "../../modal/modal.service";
 import {Vocabulary} from "../../vocabulary/vocabulary-word/vocabulary.model";
 import {CardService} from "./card.service";
 import {VocabularyWordService} from "../../vocabulary/vocabulary-word/vocabulary-word.service";
-import {ActivatedRoute, Router} from "@angular/router";
-
+import { Router} from "@angular/router";
+import {ColumnService} from "../column.service";
 
 @Component({
   selector: 'card',
@@ -20,8 +20,8 @@ export class CardComponent implements OnInit {
   constructor(private modalService: ModalService,
               private cardService: CardService,
               private vocabularyWordService: VocabularyWordService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private columnService: ColumnService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.setCardStyle();
@@ -40,8 +40,13 @@ export class CardComponent implements OnInit {
     }
   }
 
-  moveToNextColumn() {
-    this.vocabularyWordService.moveToNextColumn(this.vocab);
+  moveToNextColumn(vocabulary: Vocabulary) {
+    console.log(vocabulary.id);
+    this.vocabularyWordService.moveToNextColumn(vocabulary)
+      .toPromise()
+      .then( () => this.columnService.vocabularyAddedToColumn.next(vocabulary) )
+      .catch(err => console.log(err))
+      .finally();;
   }
 
   setCardStyle() {

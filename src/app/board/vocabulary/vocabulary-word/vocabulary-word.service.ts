@@ -3,6 +3,7 @@ import {Vocabulary} from "./vocabulary.model";
 import {Observable, Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, tap} from 'rxjs/operators'
+import {ColumnService} from "../../column/column.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class VocabularyWordService {
   wordsUpdateChange: Subject<Vocabulary> = new Subject<Vocabulary>();
   private url: string = "http://localhost:8080"; // local url
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private columnService: ColumnService) { }
 
 
   public addNewVocabulary(vocabulary: Vocabulary): void {
@@ -21,7 +23,7 @@ export class VocabularyWordService {
       .toPromise()
       .then(res => {
         if (!vocabulary.id)
-          this.wordsUpdateChange.next(res)
+          this.columnService.vocabularyAddedToColumn.next(res)
       })
       .catch(err => {
         console.log(err);
@@ -59,13 +61,8 @@ export class VocabularyWordService {
       );
   }
 
-  public moveToNextColumn(vocabularyId: Vocabulary): void {
-    this.http.put<Vocabulary>(`${this.url}/vocabulary/moveToNextColumn`, vocabularyId)
-      .toPromise()
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-      .finally();
+  public moveToNextColumn(vocabulary: Vocabulary): Observable<Vocabulary> {
+    return this.http.put<Vocabulary>(`${this.url}/vocabulary/moveToNextColumn`, vocabulary)
   }
-
 
 }

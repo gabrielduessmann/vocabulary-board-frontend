@@ -5,6 +5,7 @@ import {SprintEnum} from "./sprint.enum";
 import {Subscription} from "rxjs";
 import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-word.service";
 import {Column} from "./column.model";
+import {ColumnService} from "./column.service";
 
 @Component({
   selector: 'column',
@@ -18,13 +19,12 @@ export class ColumnComponent implements OnInit, OnDestroy {
   allVocabulary: Vocabulary[] = [];
   wordsUpdateSubscription: Subscription;
 
-  constructor(private vocabularyWordService: VocabularyWordService) { }
+  constructor(private vocabularyWordService: VocabularyWordService,
+              private columnService: ColumnService) { }
 
   ngOnInit(): void {
-
     this.getAllVocabularies(this.column.id);
-    this.subscribeToPoolColumn(this.column.status);;
-
+    this.subscribeToWhenVocabularyIdAddedToColumn();
   }
 
   getAllVocabularies(columnId: string) {
@@ -36,14 +36,11 @@ export class ColumnComponent implements OnInit, OnDestroy {
       .finally();
   }
 
-  subscribeToPoolColumn(status: StatusEnum) {
-    if (status.toString() == "POOL") {
-      this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
-        (vocab: Vocabulary) => {
-          this.allVocabulary.push(vocab);
-        }
-      );
-    }
+  subscribeToWhenVocabularyIdAddedToColumn() {
+    this.columnService.vocabularyAddedToColumn
+      .subscribe(() => {
+        this.getAllVocabularies(this.column.id);
+      })
   }
 
   ngOnDestroy() {
