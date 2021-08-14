@@ -14,6 +14,7 @@ import {Column} from "./column.model";
 export class ColumnComponent implements OnInit, OnDestroy {
 
   @Input() column: Column;
+  @Input() isVocabularyEditable: boolean;
   allVocabulary: Vocabulary[] = [];
   wordsUpdateSubscription: Subscription;
 

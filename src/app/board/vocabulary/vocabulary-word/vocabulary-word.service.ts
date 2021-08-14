@@ -16,10 +16,13 @@ export class VocabularyWordService {
   constructor(private http: HttpClient) { }
 
 
-  public addNewVocab(vocab: Vocabulary) {
-    this.http.post<Vocabulary>(this.url+"/vocabulary", vocab)
+  public addNewVocabulary(vocabulary: Vocabulary): void {
+    this.http.post<Vocabulary>(this.url+"/vocabulary", vocabulary)
       .toPromise()
-      .then(res => this.wordsUpdateChange.next(res))
+      .then(res => {
+        if (!vocabulary.id)
+          this.wordsUpdateChange.next(res)
+      })
       .catch(err => {
         console.log(err);
       })
@@ -36,6 +39,12 @@ export class VocabularyWordService {
           })
         })
       );
+  }
+
+  public findVocabularyById(id:string): Observable<Vocabulary> {
+    return this.http
+      .get<Vocabulary>(`${this.url}/vocabulary/${id}`)
+      .pipe();
   }
 
   public findVocabulariesByColumnId(columnId: string): Observable<Vocabulary[]>{
