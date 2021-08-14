@@ -34,7 +34,9 @@ export class CardComponent implements OnInit {
       this.modalService.showModal();
 
        */
-      this.router.navigate([`vocabulary/${this.vocab.id}`]);
+      if (this.vocab.id) {
+        this.router.navigate([`vocabulary/${this.vocab.id}`]);
+      }
     }
   }
 
