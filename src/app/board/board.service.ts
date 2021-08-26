@@ -15,6 +15,17 @@ export class BoardService {
   }
 
   public getAllBoardColumns(): Observable<Column[]> {
+    return this.http.get<Column[]>(this.url+"/columns/in-board")
+      .pipe(
+        map(columns => {
+          return columns.map(column => {
+            return {...column}
+          })
+        })
+      );
+  }
+
+  public getAllBoardColumnsInProgress(): Observable<Column[]> {
     return this.http.get<Column[]>(this.url+"/columns/in-progress")
       .pipe(
         map(columns => {
@@ -23,6 +34,5 @@ export class BoardService {
           })
         })
       );
-
   }
 }

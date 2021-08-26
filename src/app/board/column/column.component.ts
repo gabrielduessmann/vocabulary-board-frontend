@@ -43,6 +43,10 @@ export class ColumnComponent implements OnInit, OnDestroy {
       })
   }
 
+  canMoveColumn(): boolean {
+      return this.column.status.toString() !== 'DONE';
+  }
+
   ngOnDestroy() {
     if (this.wordsUpdateSubscription)
       this.wordsUpdateSubscription.unsubscribe();

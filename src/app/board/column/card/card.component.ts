@@ -15,6 +15,7 @@ export class CardComponent implements OnInit {
 
   @Input() vocab: Vocabulary;
   @Input() isVocabularyEditable: boolean = false;
+  @Input() canMoveColumn: boolean = true;
   cardStyle: Record<string, string>;
 
   constructor(private modalService: ModalService,
@@ -41,7 +42,6 @@ export class CardComponent implements OnInit {
   }
 
   moveToNextColumn(vocabulary: Vocabulary) {
-    console.log(vocabulary.id);
     this.vocabularyWordService.moveToNextColumn(vocabulary)
       .toPromise()
       .then( () => this.columnService.vocabularyAddedToColumn.next(vocabulary) )

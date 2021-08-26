@@ -1,8 +1,18 @@
 
 <div class="card" style="width: 15rem;">
-  <div class="card-header">
-    {{column.title}}
-  </div>
- <card *ngFor="let vocab of allVocabulary" [vocab]="vocab" [isVocabularyEditable]="isVocabularyEditable"></card>
+
+    <div class=" card-header">
+      {{column.title}}
+
+    <div style="float: right; font-size: 10px;">
+      {{column.status}}
+    </div>
+    </div>
+
+ <card *ngFor="let vocab of allVocabulary"
+       [vocab]="vocab"
+       [isVocabularyEditable]="isVocabularyEditable"
+       [canMoveColumn]="canMoveColumn()">
+ </card>
 </div>
 

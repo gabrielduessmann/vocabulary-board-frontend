@@ -22,7 +22,6 @@ export class VocabularyWordService {
     this.http.post<Vocabulary>(this.url+"/vocabulary", vocabulary)
       .toPromise()
       .then(res => {
-        if (!vocabulary.id)
           this.columnService.vocabularyAddedToColumn.next(res)
       })
       .catch(err => {
