@@ -25,19 +25,14 @@ export class CardComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.setCardStyle();
   }
 
   openModal() {
     if (this.isVocabularyEditable) {
-      /*
+      if (this.vocab.id) this.router.navigate([`vocabulary/${this.vocab.id}`]);
+    } else {
       this.cardService.setModalVocab(this.vocab);
       this.modalService.showModal();
-
-       */
-      if (this.vocab.id) {
-        this.router.navigate([`vocabulary/${this.vocab.id}`]);
-      }
     }
   }
 
@@ -49,13 +44,4 @@ export class CardComponent implements OnInit {
       .finally();;
   }
 
-  setCardStyle() {
-    if (this.isVocabularyEditable) {
-      this.cardStyle = {
-        'cursor': 'pointer'
-      }
-    } else {
-      this.cardStyle = {};
-    }
-  }
 }
