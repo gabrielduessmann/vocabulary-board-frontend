@@ -75,7 +75,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    console.log("destroy modal");
     if (this.updateVocabulary) {
     }
 

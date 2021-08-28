@@ -15,6 +15,8 @@ import { ModalComponent } from './board/modal/modal.component';
 import {BsModalService} from "ngx-bootstrap/modal";
 import {HttpClientModule} from "@angular/common/http";
 import {CommentService} from "./board/vocabulary/comment/comment.service";
+import { PracticeComponent } from './practice/practice.component';
+import { CardColumnComponent } from './practice/card-column/card-column.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {CommentService} from "./board/vocabulary/comment/comment.service";
     CardComponent,
     BoardComponent,
     VocabularyWordComponent,
-    ModalComponent
+    ModalComponent,
+    PracticeComponent,
+    CardColumnComponent
   ],
   imports: [
     BrowserModule,

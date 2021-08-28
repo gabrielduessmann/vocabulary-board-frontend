@@ -1,0 +1,56 @@
+
+<div class="container">
+
+  <div class="row">
+
+<!--  Columns in progress -->
+    <div
+      class="col-sm-3">
+      <div class="card-header">
+        Columns
+      </div>
+      <card-column
+        *ngFor="let column of columns; let i = index"
+        [column]="column"
+        [isArrowRightSide]="true"
+        [index]="i">
+      </card-column>
+    </div>
+
+<!--  Selected columns to practice -->
+    <div class="col-sm-3">
+
+      <div class="card-header">
+          To Practice
+        </div>
+        <card-column
+          *ngFor="let column of columnsToPractice; let i = index"
+          [column]="column"
+          [isArrowRightSide]="false"
+          [index]="i">
+        </card-column>
+    </div>
+
+<!--  Actions  -->
+    <div class="col-sm-3">
+      <div class="card-header">
+        Actions
+      </div>
+      <ul class="list-group list-group-flush">
+        <button [disabled]="columnsToPractice.length == 0" (click)="practiceColumns(columnsToPractice)">
+          <li class="list-group-item">
+           Practice selected columns
+          </li>
+        </button>
+      </ul>
+      <ul class="list-group list-group-flush">
+        <button>
+          <li class="list-group-item" (click)="practiceColumns(columns.concat(columnsToPractice))">
+            Practice all columns
+          </li>
+        </button>
+      </ul>
+
+    </div>
+
+</div>

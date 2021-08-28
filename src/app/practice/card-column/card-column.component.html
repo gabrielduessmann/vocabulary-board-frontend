@@ -1,0 +1,14 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <div *ngIf="isArrowRightSide; else arrowLeftSide">
+      <span style="cursor: 'pointer'"> {{column.title}}</span>
+      <span style="cursor: 'pointer'; float: 'right'" (click)="moveColumnToPractice()">></span>
+    </div>
+
+    <ng-template #arrowLeftSide>
+      <span style="cursor: 'pointer'; float: 'right'"> {{column.title}}</span>
+      <span style="cursor: 'pointer'; float: 'left'" (click)="removeColumnFromPractice()"><</span>
+    </ng-template>
+
+  </li>
+</ul>
