@@ -1,4 +1,5 @@
-export class VocabularyModel {
+export class Vocabulary {
+  public id: string
   public word: string;
   public description: string
 

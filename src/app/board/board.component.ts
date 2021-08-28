@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BoardService} from "./board.service";
+import {Column} from "./column/column.model";
 
 @Component({
   selector: 'board',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  columns: Column[];
+
+  constructor(private boardService: BoardService) { }
 
   ngOnInit(): void {
+    // get all columns
+    this.getAllColumns();
+  }
+
+  getAllColumns() {
+    this.boardService.getAllBoardColumns()
+      .toPromise()
+      .then(columns => this.columns = columns )
+      .catch(err => console.log(err))
+      .finally();
+
   }
 
 }

@@ -3,16 +3,9 @@
     <vocabulary-word></vocabulary-word>
   </div>
 
-<!--</div>-->
-
-  <div class="col-md-4" style="background-color: white">
-    <column [status]="initialStatus" [title]="'Pool'"></column>
+  <div class="col-md-4" *ngFor="let column of columns">
+    <column [column]="column" [isVocabularyEditable]="true"></column>
   </div>
-
-  <div class="col-md-4" style="background-color: white">
-    <column [status]="1" [title]="'Backlog'"></column>
-  </div>
-
 
 </div>
 

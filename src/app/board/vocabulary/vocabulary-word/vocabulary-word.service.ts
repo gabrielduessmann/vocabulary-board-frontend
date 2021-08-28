@@ -1,21 +1,67 @@
 import { Injectable } from '@angular/core';
-import {VocabularyModel} from "./vocabulary.model";
-import {Subject} from "rxjs";
+import {Vocabulary} from "./vocabulary.model";
+import {Observable, Subject} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, tap} from 'rxjs/operators'
+import {ColumnService} from "../../column/column.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VocabularyWordService {
 
-  words: VocabularyModel[] = []
-  wordsUpdateChange: Subject<VocabularyModel[]> = new Subject<VocabularyModel[]>();
+  words: Vocabulary[] = []
+  wordsUpdateChange: Subject<Vocabulary> = new Subject<Vocabulary>();
+  private url: string = "http://localhost:8080"; // local url
 
-  constructor() { }
+  constructor(private http: HttpClient,
+              private columnService: ColumnService) { }
 
-  addNewWord(newWord: VocabularyModel) {
-    this.words.push(newWord);
-    console.log(this.words);
-    this.wordsUpdateChange.next(this.words.slice());
+
+  public addNewVocabulary(vocabulary: Vocabulary): void {
+    this.http.post<Vocabulary>(this.url+"/vocabulary", vocabulary)
+      .toPromise()
+      .then(res => {
+          this.columnService.vocabularyAddedToColumn.next(res)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally();
+  }
+
+  public getVocabs(): Observable<Vocabulary[]> {
+    return this.http
+      .get<Vocabulary[]>(this.url+"/vocabularies")
+      .pipe(
+        map(vocabularies => {
+          return vocabularies.map(vocabulary => {
+            return {...vocabulary}
+          })
+        })
+      );
+  }
+
+  public findVocabularyById(id:string): Observable<Vocabulary> {
+    return this.http
+      .get<Vocabulary>(`${this.url}/vocabulary/${id}`)
+      .pipe();
+  }
+
+  public findVocabulariesByColumnId(columnId: string): Observable<Vocabulary[]>{
+    return this.http
+      .get<Vocabulary[]>(this.url+"/vocabularies/column/"+columnId)
+      .pipe(
+        map(vocabularies => {
+          return vocabularies.map(vocabulary => {
+            return {...vocabulary}
+          })
+        })
+      );
+  }
+
+  public moveToNextColumn(vocabulary: Vocabulary): Observable<Vocabulary> {
+    return this.http.put<Vocabulary>(`${this.url}/vocabulary/moveToNextColumn`, vocabulary)
   }
 
 }

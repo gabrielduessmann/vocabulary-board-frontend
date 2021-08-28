@@ -1,15 +1,36 @@
+<!-- Word -->
+<div class="p-3">
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title">{{title}}</h5>
+    <h3 class="modal-title" [title]="vocab.description">{{vocab.word}}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <p>Modal body text goes here.</p>
+
+<!--  Comments -->
+
+  <div>
+    <div class="row-cols-6">
+      <button (click)="addCommentRow()">+</button>
+      <button *ngIf="addRow" (click)="deleteCommentRow()">-</button>
+      <h5> Comments </h5>
+    </div>
+    <div>
+      <form [formGroup]="newCommentFormGroup">
+        <div *ngIf="addRow" class="modal-content">
+          <textarea
+            type="text"
+            placeholder="Write a comment"
+            formControlName="comment"
+            class="p-2"
+          ></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-content p-2" *ngFor="let comment of comments">
+      <p>{{comment.comment}}</p>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="onSave()">Save changes</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
-  </div>
+</div>
 </div>

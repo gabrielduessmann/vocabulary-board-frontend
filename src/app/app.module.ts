@@ -13,6 +13,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { VocabularyWordComponent } from './board/vocabulary/vocabulary-word/vocabulary-word.component';
 import { ModalComponent } from './board/modal/modal.component';
 import {BsModalService} from "ngx-bootstrap/modal";
+import {HttpClientModule} from "@angular/common/http";
+import {CommentService} from "./board/vocabulary/comment/comment.service";
 
 
 @NgModule({
@@ -31,10 +33,11 @@ import {BsModalService} from "ngx-bootstrap/modal";
     NgbModule,
     RoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [BsModalService],
+  providers: [BsModalService, CommentService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent] // FIXME really necessay?
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

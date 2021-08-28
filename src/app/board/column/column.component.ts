@@ -1,9 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {VocabularyModel} from "../vocabulary/vocabulary-word/vocabulary.model";
+import {Vocabulary} from "../vocabulary/vocabulary-word/vocabulary.model";
 import {StatusEnum} from "./status.enum";
 import {SprintEnum} from "./sprint.enum";
 import {Subscription} from "rxjs";
 import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-word.service";
+import {Column} from "./column.model";
+import {ColumnService} from "./column.service";
 
 @Component({
   selector: 'column',
@@ -12,59 +14,37 @@ import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-wo
 })
 export class ColumnComponent implements OnInit, OnDestroy {
 
-  @Input() sprint: SprintEnum;
-  @Input() status: StatusEnum;
-  @Input() title: string;
-  allVocabulary: VocabularyModel[] = [];
-  // wordsUpdateSubscription: Subject<VocabularyWordModel[]> = new Subject<VocabularyWordModel[]>();
+  @Input() column: Column;
+  @Input() isVocabularyEditable: boolean;
+  allVocabulary: Vocabulary[] = [];
   wordsUpdateSubscription: Subscription;
 
-  constructor(private vocabularyWordService: VocabularyWordService) { }
+  constructor(private vocabularyWordService: VocabularyWordService,
+              private columnService: ColumnService) { }
 
   ngOnInit(): void {
-    this.allVocabulary = [
-      new VocabularyModel("hello", ""),
-      new VocabularyModel("bye", ""),
-      new VocabularyModel("never mind", ""),
-    ];
-    this.getAllVocabularyWords(this.status, this.sprint);
+    this.getAllVocabularies(this.column.id);
+    this.subscribeToWhenVocabularyIdAddedToColumn();
   }
 
-  getAllVocabularyWords(status: StatusEnum, sprint: SprintEnum) {
-    if (status == StatusEnum.POOL) {
-      this.wordsUpdateSubscription = this.vocabularyWordService.wordsUpdateChange.subscribe(
-        (vocab: VocabularyModel[]) => {
-          this.allVocabulary = vocab;
-        }
-      );
-    }
-    else {
-      this.allVocabulary = [
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("computer", ""),
-        new VocabularyModel("body", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("car", ""),
-        new VocabularyModel("to develop", ""),
-        new VocabularyModel("to drive", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-        new VocabularyModel("hello", ""),
-        new VocabularyModel("bye", ""),
-        new VocabularyModel("never mind", ""),
-      ];
-    }
+  getAllVocabularies(columnId: string) {
+    this.vocabularyWordService
+      .findVocabulariesByColumnId(columnId)
+      .toPromise()
+      .then(res => this.allVocabulary = res)
+      .catch(err => console.log(err))
+      .finally();
+  }
+
+  subscribeToWhenVocabularyIdAddedToColumn() {
+    this.columnService.vocabularyAddedToColumn
+      .subscribe(() => {
+        this.getAllVocabularies(this.column.id);
+      })
+  }
+
+  canMoveColumn(): boolean {
+      return this.column.status.toString() !== 'DONE';
   }
 
   ngOnDestroy() {
