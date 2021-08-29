@@ -1,1 +1,6 @@
-<column *ngFor="let column of columns" [column]="column"></column>
+<div class="custom-control custom-switch mb-2 ml-3">
+  <input type="checkbox" class="custom-control-input" id="customSwitch" (click)="showColumnsOnlyInProgress()">
+  <label class="custom-control-label" for="customSwitch">Only in progress</label>
+</div>
+
+<column *ngFor="let column of showColumns" [column]="column"></column>
