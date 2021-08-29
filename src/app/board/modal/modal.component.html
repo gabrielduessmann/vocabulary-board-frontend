@@ -13,12 +13,12 @@
   <div>
     <div class="row-cols-6">
       <button (click)="addCommentRow()">+</button>
-      <button *ngIf="addRow" (click)="deleteCommentRow()">-</button>
+      <button *ngIf="commentRow" (click)="deleteCommentRow()">-</button>
       <h5> Comments </h5>
     </div>
     <div>
       <form [formGroup]="newCommentFormGroup">
-        <div *ngIf="addRow" class="modal-content">
+        <div *ngIf="commentRow" class="modal-content">
           <textarea
             type="text"
             placeholder="Write a comment"

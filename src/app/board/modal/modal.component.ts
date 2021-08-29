@@ -1,10 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {Vocabulary} from "../vocabulary/vocabulary-word/vocabulary.model";
 import {CardService} from "../column/card/card.service";
 import {Comment} from "../vocabulary/comment/comment.model";
 import {CommentService} from "../vocabulary/comment/comment.service";
-import {catchError} from "rxjs/operators";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -17,7 +16,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   updateVocabulary: boolean = false;
   vocab: Vocabulary;
   comments: Comment[] = [];
-  addRow: boolean = false;
+  commentRow: boolean = true;
   newCommentFormGroup: FormGroup = this.getNewCommentFormGroup();
 
   constructor(
@@ -42,12 +41,12 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   addCommentRow(): void {
-    if (this.addRow) this.saveComment();
-    else this.addRow = true;
+    if (this.commentRow) this.saveComment();
+    else this.commentRow = true;
   }
 
   deleteCommentRow(): void {
-    this.addRow = false;
+    this.commentRow = false;
     this.newCommentFormGroup.reset();
   }
 
