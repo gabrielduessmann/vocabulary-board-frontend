@@ -1,11 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Vocabulary} from "../vocabulary/vocabulary-word/vocabulary.model";
-import {StatusEnum} from "./status.enum";
-import {SprintEnum} from "./sprint.enum";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {VocabularyWordService} from "../vocabulary/vocabulary-word/vocabulary-word.service";
 import {Column} from "./column.model";
 import {ColumnService} from "./column.service";
+import {PracticeService} from "../../practice/practice.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'column',
@@ -18,13 +18,18 @@ export class ColumnComponent implements OnInit, OnDestroy {
   @Input() isVocabularyEditable: boolean;
   allVocabulary: Vocabulary[] = [];
   wordsUpdateSubscription: Subscription;
+  practiceColumnChange = new Subject<Column>();
+  isInPracticeScreen: boolean = this.router.url === '/practice-vocabularies'
 
   constructor(private vocabularyWordService: VocabularyWordService,
-              private columnService: ColumnService) { }
+              private columnService: ColumnService,
+              private practiceService: PracticeService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getAllVocabularies(this.column.id);
     this.subscribeToWhenVocabularyIdAddedToColumn();
+    this.subscribeToPracticeColumnChange();
   }
 
   getAllVocabularies(columnId: string) {
@@ -43,8 +48,14 @@ export class ColumnComponent implements OnInit, OnDestroy {
       })
   }
 
+  subscribeToPracticeColumnChange(): void {
+    this.practiceService.practiceColumnChanges.subscribe(
+      newColumn => this.getAllVocabularies(newColumn.id)
+    )
+  }
+
   canMoveColumn(): boolean {
-      return this.column.status.toString() !== 'DONE';
+      return this.column.status.toString() !== 'DONE' && !this.isInPracticeScreen;
   }
 
   ngOnDestroy() {

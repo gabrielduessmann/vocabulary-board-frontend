@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
   @Input() vocab: Vocabulary;
   @Input() isVocabularyEditable: boolean = false;
   @Input() canMoveColumn: boolean = true;
-  cardStyle: Record<string, string>;
+  isInPracticeScreen: boolean = this.router.url === '/practice-vocabularies'
 
   constructor(private modalService: ModalService,
               private cardService: CardService,
@@ -28,11 +28,13 @@ export class CardComponent implements OnInit {
   }
 
   openModal() {
-    if (this.isVocabularyEditable) {
-      if (this.vocab.id) this.router.navigate([`vocabulary/${this.vocab.id}`]);
-    } else {
-      this.cardService.setModalVocab(this.vocab);
-      this.modalService.showModal();
+    if (!this.isInPracticeScreen) {
+      if (this.isVocabularyEditable) {
+        if (this.vocab.id) this.router.navigate([`vocabulary/${this.vocab.id}`]);
+      } else {
+        this.cardService.setModalVocab(this.vocab);
+        this.modalService.showModal();
+      }
     }
   }
 

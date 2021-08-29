@@ -33,23 +33,21 @@
 
 <!--  Actions  -->
     <div class="col-sm-3">
-      <div class="card-header">
-        Actions
-      </div>
-      <ul class="list-group list-group-flush">
-        <button [disabled]="columnsToPractice.length == 0" (click)="practiceColumns(columnsToPractice)">
-          <li class="list-group-item">
+      <div class="my-1">
+        <button
+          [disabled]="columnsToPractice.length == 0"
+          (click)="practiceColumns(columnsToPractice)"
+          class="btn btn-secondary w-100">
            Practice selected columns
-          </li>
+
         </button>
-      </ul>
-      <ul class="list-group list-group-flush">
-        <button>
-          <li class="list-group-item" (click)="practiceColumns(columns.concat(columnsToPractice))">
+      </div>
+        <button
+          [disabled]="columns.concat(columnsToPractice).length == 0"
+          (click)="practiceColumns(columns.concat(columnsToPractice))"
+          class="btn btn-secondary w-100">
             Practice all columns
-          </li>
         </button>
-      </ul>
 
     </div>
 

@@ -3,6 +3,7 @@ import {Column} from "../board/column/column.model";
 import {ColumnService} from "../board/column/column.service";
 import {CardColumnService} from "./card-column/card-column.service";
 import {PracticeService} from "./practice.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-practice',
@@ -16,16 +17,17 @@ export class PracticeComponent implements OnInit {
   constructor(
     private columnService: ColumnService,
     private cardColumnService: CardColumnService,
-    private practiceService: PracticeService
+    private practiceService: PracticeService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.getAllColumnsInProgress();
+    this.getAllColumnsInProgressToPractice();
     this.subscribeToColumnChanges();
   }
 
-  getAllColumnsInProgress(): void {
-    this.columnService.getAllBoardColumnsInProgress()
+  getAllColumnsInProgressToPractice(): void {
+    this.columnService.getAllColumnsInProgressToPractice()
       .subscribe(
         res => this.columns = res,
         err => console.log(err)
@@ -45,7 +47,8 @@ export class PracticeComponent implements OnInit {
   }
 
   practiceColumns(columns: Column[]): void {
-    this.practiceService.practiceVocabularies(columns);
+    this.practiceService.practiceColumns = columns;
+    this.router.navigate(['practice-vocabularies']);
   }
 
 

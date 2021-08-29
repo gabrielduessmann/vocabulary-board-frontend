@@ -37,4 +37,8 @@ export class ColumnService {
         })
       );
   }
+
+  public getAllColumnsInProgressToPractice(): Observable<Column[]> {
+    return this.http.get<Column[]>(this.url+"/columns/in-progress-practice")
+  }
 }

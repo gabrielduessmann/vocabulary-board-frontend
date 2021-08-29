@@ -17,6 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommentService} from "./board/vocabulary/comment/comment.service";
 import { PracticeComponent } from './practice/practice.component';
 import { CardColumnComponent } from './practice/card-column/card-column.component';
+import { PracticeColumnComponent } from './practice/practice-column/practice-column.component';
+import { PracticeVocabulariesComponent } from './practice/practice-vocabularies/practice-vocabularies.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { CardColumnComponent } from './practice/card-column/card-column.componen
     VocabularyWordComponent,
     ModalComponent,
     PracticeComponent,
-    CardColumnComponent
+    CardColumnComponent,
+    PracticeColumnComponent,
+    PracticeVocabulariesComponent
   ],
   imports: [
     BrowserModule,
