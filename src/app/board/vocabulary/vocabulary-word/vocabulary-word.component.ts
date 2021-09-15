@@ -63,7 +63,8 @@ export class VocabularyWordComponent implements OnInit {
   onSubmit() {
     let word: Vocabulary = new Vocabulary(
       this.vocabularyWordForm.value.word,
-      this.vocabularyWordForm.value.description
+      this.vocabularyWordForm.value.description,
+      new Date()
     );
     if (this.vocabularyId) {
       word.id = this.vocabularyId;
