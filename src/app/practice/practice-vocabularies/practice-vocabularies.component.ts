@@ -85,6 +85,9 @@ export class PracticeVocabulariesComponent implements OnInit {
     }
   }
 
-
+  skip(): void {
+    this.vocabularies.splice(0 ,1);
+    this.update();
+  }
 
 }

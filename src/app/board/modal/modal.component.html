@@ -8,20 +8,20 @@
     </button>
   </div>
 
-<!--  Comments -->
+<!--  Sentences -->
 
   <div>
     <div class="row-cols-6">
       <button (click)="addCommentRow()">+</button>
       <button *ngIf="commentRow" (click)="deleteCommentRow()">-</button>
-      <h5> Comments </h5>
+      <h5> Sentences </h5>
     </div>
     <div>
       <form [formGroup]="newCommentFormGroup">
         <div *ngIf="commentRow" class="modal-content">
           <textarea
             type="text"
-            placeholder="Write a comment"
+            placeholder="Write a sentence"
             formControlName="comment"
             class="p-2"
           ></textarea>

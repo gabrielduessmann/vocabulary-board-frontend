@@ -1,18 +1,19 @@
 <h2 *ngIf="vocabularies.length > 0"><b>{{vocabularies[0].word}}</b></h2>
 
-<h5>Comments</h5>
+<h5>Sentences</h5>
 
 <div class="mb-4">
   <form [formGroup]="commentFormGroup" (ngSubmit)="saveComment()">
     <textarea
       formControlName="comment"
       type="text"
-      placeholder="Write a comment"
+      placeholder="Write a sentence"
       formControlName="comment"
       class="p-2 w-100"
       style="resize: none">
     </textarea>
-    <button type="submit" class="btn btn-secondary">Save comment</button>
+    <button type="submit" class="btn btn-secondary" [disabled]="!commentFormGroup.valid">Save sentence</button>
+    <button type="button" class="btn btn-secondary" (click)="skip()" style="float: right; width: 15%;">Skip</button>
   </form>
 </div>
 
