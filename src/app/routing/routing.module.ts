@@ -5,6 +5,7 @@ import {BoardComponent} from "../board/board.component";
 import {PracticeComponent} from "../practice/practice.component";
 import {PracticeColumnComponent} from "../practice/practice-column/practice-column.component";
 import { VocabulariesListComponent } from "../vocabularies-list/vocabularies-list.component";
+import { ConfigurationComponent } from "../configuration/configuration.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/board', pathMatch: 'full'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'vocabulary/:id', component: VocabularyComponent},
   {path: 'practice', component: PracticeComponent},
   {path: 'practice-vocabularies', component: PracticeColumnComponent},
-  {path: 'vocabularies-list', component: VocabulariesListComponent}
+  {path: 'vocabularies-list', component: VocabulariesListComponent},
+  {path: 'configuration', component: ConfigurationComponent}
 ];
 
 @NgModule({

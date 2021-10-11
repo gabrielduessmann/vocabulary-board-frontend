@@ -20,6 +20,7 @@ import { CardColumnComponent } from './practice/card-column/card-column.componen
 import { PracticeColumnComponent } from './practice/practice-column/practice-column.component';
 import { PracticeVocabulariesComponent } from './practice/practice-vocabularies/practice-vocabularies.component';
 import { VocabulariesListComponent } from './vocabularies-list/vocabularies-list.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { VocabulariesListComponent } from './vocabularies-list/vocabularies-list
     CardColumnComponent,
     PracticeColumnComponent,
     PracticeVocabulariesComponent,
-    VocabulariesListComponent
+    VocabulariesListComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
