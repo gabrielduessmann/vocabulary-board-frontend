@@ -21,6 +21,7 @@ import { PracticeColumnComponent } from './practice/practice-column/practice-col
 import { PracticeVocabulariesComponent } from './practice/practice-vocabularies/practice-vocabularies.component';
 import { VocabulariesListComponent } from './vocabularies-list/vocabularies-list.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { CustomDatePipe } from './pipes/customadate.pipe';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
     PracticeColumnComponent,
     PracticeVocabulariesComponent,
     VocabulariesListComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    CustomDatePipe
   ],
   imports: [
     BrowserModule,

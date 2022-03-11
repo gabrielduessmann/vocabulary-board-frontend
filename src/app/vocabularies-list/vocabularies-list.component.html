@@ -24,7 +24,7 @@
                     <td scope="row">{{ vocabulary.word }}</td>
                     <td> {{ vocabulary.description }} </td>
                     <td> {{ vocabulary.column.title }} (<i>{{ vocabulary.column.status.toString() | lowercase }}</i>) </td>
-                    <td> {{ vocabulary.creationDate }} </td>
+                    <td> {{ vocabulary.creationDate | customdate }} </td>
                   </tr>
                 </tbody>
               </table>
