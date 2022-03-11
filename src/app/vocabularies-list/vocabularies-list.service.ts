@@ -15,6 +15,6 @@ export class VocabulariesListService {
   ) { }
 
   public getVocabularies(): Observable<Vocabulary[]> {
-    return this.http.get<Vocabulary[]>(`${this.url}/vocabularies`)
+    return this.http.get<Vocabulary[]>(`${this.url}/vocabularies`);
   }
 }
