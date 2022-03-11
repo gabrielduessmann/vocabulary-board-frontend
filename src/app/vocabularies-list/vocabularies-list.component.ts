@@ -22,7 +22,6 @@ export class VocabulariesListComponent implements OnInit {
   getVocabularies(): void {
     this.vocabulariesListService.getVocabularies().subscribe(
       (res) => {
-        console.log(res)
         this.vocabularies = res
       }
     )

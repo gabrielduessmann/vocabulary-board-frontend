@@ -23,7 +23,7 @@
                   <tr *ngFor="let vocabulary of vocabularies">
                     <td scope="row">{{ vocabulary.word }}</td>
                     <td> {{ vocabulary.description }} </td>
-                    <td> {{ vocabulary.column.title }} (<i>{{ vocabulary.column.status }}</i>) </td>
+                    <td> {{ vocabulary.column.title }} (<i>{{ vocabulary.column.status.toString() | lowercase }}</i>) </td>
                     <td> {{ vocabulary.creationDate }} </td>
                   </tr>
                 </tbody>

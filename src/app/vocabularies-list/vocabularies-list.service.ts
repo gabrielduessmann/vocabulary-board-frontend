@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Vocabulary } from '../board/vocabulary/vocabulary-word/vocabulary.model';
 
 @Injectable({
@@ -15,6 +16,18 @@ export class VocabulariesListService {
   ) { }
 
   public getVocabularies(): Observable<Vocabulary[]> {
-    return this.http.get<Vocabulary[]>(`${this.url}/vocabularies`);
+    return this.http.get<Vocabulary[]>(`${this.url}/vocabularies`)
+        .pipe(
+          tap((vocabs: any[]) => {
+            vocabs.forEach((vocab: any) => {
+              switch (vocab.column.status) {
+                case "IN_PROGRESS":
+                  vocab.column.status = "IN PROGRESS"
+                  break
+              }
+            });
+            
+          })
+        );
   }
 }
