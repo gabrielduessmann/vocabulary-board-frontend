@@ -31,8 +31,10 @@ export class BoardComponent implements OnInit {
   }
 
   showColumnsOnlyInProgress() {
-    if (this.columnsOnlyInProgress) this.showColumns = this.allColumns;
-    else this.showColumns = this.allColumns.filter(column => column.status.toString() === "IN_PROGRESS");
+    if (this.allColumns) {
+      if (this.columnsOnlyInProgress) this.showColumns = this.allColumns;
+      else this.showColumns = this.allColumns.filter(column => column.status.toString() === "IN_PROGRESS");
+    }
     this.columnsOnlyInProgress = !this.columnsOnlyInProgress;
   }
 
