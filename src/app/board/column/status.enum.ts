@@ -1,7 +1,7 @@
 export enum StatusEnum {
-  POOL,
-  BACKLOG,
-  IN_PROGRESS,
-  PAUSED,
-  DONE
+  POOL = "POOL",
+  BACKLOG = "BACKLOG",
+  IN_PROGRESS = "IN_PROGRESS",
+  PAUSED = "PAUSED",
+  DONE = "DONE"
 }

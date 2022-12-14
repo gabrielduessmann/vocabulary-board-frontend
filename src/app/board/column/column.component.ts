@@ -6,6 +6,7 @@ import {Column} from "./column.model";
 import {ColumnService} from "./column.service";
 import {PracticeService} from "../../practice/practice.service";
 import {Router} from "@angular/router";
+import { StatusEnum } from './status.enum';
 
 @Component({
   selector: 'column',
@@ -56,6 +57,19 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   canMoveColumn(): boolean {
       return this.column.status.toString() !== 'DONE' && !this.isInPracticeScreen;
+  }
+
+  getColumnStatusColor(): string {
+    var color: string = 'black';
+    switch (this.column.status) {
+      case StatusEnum.IN_PROGRESS:
+          color = 'green';
+          break;
+      case StatusEnum.PAUSED:
+          color = 'red';
+          break;
+    }
+    return color
   }
 
   ngOnDestroy() {

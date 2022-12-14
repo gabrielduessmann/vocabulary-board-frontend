@@ -4,9 +4,10 @@
     <div class="card-header">
       {{column.title}}
 
-    <div style="float: right; font-size: 10px;">
-      {{column.status}}
-    </div>
+      <div style="float: right; font-size: 10px;">
+        <p [style.color]="getColumnStatusColor()"> {{column.status}} </p>
+      </div>
+      
     </div>
 
  <card *ngFor="let vocab of allVocabulary"
